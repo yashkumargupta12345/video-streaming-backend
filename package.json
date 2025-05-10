@@ -4,7 +4,7 @@
   "description": "this is a backend project in which we are going to build video-streaming app backend functionalities",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "author": "yash",
   "license": "ISC"
