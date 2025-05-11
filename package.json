@@ -1,11 +1,16 @@
 {
   "name": "video-streaming-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "this is a backend project in which we are going to build video-streaming app backend functionalities",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js"
   },
   "author": "yash",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "mongoose": "^8.14.2"
+  }
 }
