@@ -1,8 +1,9 @@
 import asyncHandler from "../utils/asyncHandler.js"
-import User from "../models/User.js"
+import User from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 
-const registerUser = asyncHandler( async (req, res) => {
+const registerUser = asyncHandler( 
+    async (req, res) => {
     const {fullname , username, email, password} = req.body;
     console.log("email: ", email);
 
@@ -13,10 +14,10 @@ const registerUser = asyncHandler( async (req, res) => {
             message: "Please fill all the fields"
         })
     }
-    User.findOne({
+    let existedUser = await User.findOne({
         $or: [ {username}, {email}]
     }).then(async (user) => {
-    if(existedUser) {
+    if(user) {
         return res.status(400).json({
             success: false,
             message: "User already exists"
@@ -24,7 +25,14 @@ const registerUser = asyncHandler( async (req, res) => {
     }})
         
     const avatarLocalPath = req.files?.avatar[0]?.path
-    const coverImageLocalPath = req.files?.coverImage[0]?.path
+    // const coverImageLocalPath = req.files?.coverImage[0]?.path
+
+    let coverImageLocalPath;
+    if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
+        coverImageLocalPath = req.files.coverImage[0].path;
+
+    }
+
 
     if(!avatarLocalPath || !coverImageLocalPath) {
         return res.status(400).json({

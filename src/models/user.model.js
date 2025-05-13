@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
         type: String    // Cover image URL
     },
     watchHistory: {
-        type: Schema.Types.ObjectId, // Array of video IDs
+        type: mongoose.Schema.Types.ObjectId, // Array of video IDs
         ref: "Video"
     },
     password: {
